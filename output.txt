@@ -1,0 +1,244 @@
+Wed 04 May 2022 04:16:47 PM PDT
+Linux csslab7h 4.19.0-20-amd64 #1 SMP Debian 4.19.235-1 (2022-03-17) x86_64 GNU/Linux
+uid=1077809(rchua1) gid=2121077809(rchua1) groups=2121077809(rchua1),605559(lab-access)
+=====================================================
+1. Compiles without warnings with -Wall -Wextra flags
+=====================================================
+=====================================================
+2. Runs and produces correct output
+=====================================================
+Width: 10
+Height: 7
+RowExit: 6
+ColumnExit: 2
+xxxxxxxxxx
+x  xxx   x
+x  x     x
+x        x
+x        x
+x        x
+xx xxxxxxx
+Clear?: 1
+Wall?: 1
+Creature location: (0,0)
+Creature is not at a valid starting point. Try new location.
+xxxxxxxxxx
+x  xxx   x
+x  x     x
+x        x
+x        x
+x        x
+xx xxxxxxx
+Creature end Location: (0,0)
+Path to exit: X
+Visited?: 0
+Path?: 0
+
+Width: 20
+Height: 7
+RowExit: 0
+ColumnExit: 18
+xxxxxxxxxxxxxxxxxx x
+x     x        xxx x
+x xxxxx  xxxxx  xx x
+x xxxxx xxxxxxx xx x
+x x          xx xx x
+x xxxxxxxxxx xx    x
+xxxxxxxxxxxxxxxxxxxx
+Creature location: (4,4)
+xxxxxxxxxxxxxxxxxx*x
+x     x********xxx*x
+x xxxxx* xxxxx**xx*x
+x xxxxx*xxxxxxx*xx*x
+x x  ***+++++xx*xx*x
+x xxxxxxxxxx+xx****x
+xxxxxxxxxxxxxxxxxxxx
+Creature end Location: (0,18)
+Path to exit: EEENNNEEEEEEESESSSEEENNNNN
+
+Width: 10
+Height: 7
+RowExit: 6
+ColumnExit: 3
+xxxxxxxxxx
+x  xxx   x
+x  x     x
+x        x
+x        x
+x        x
+xxxxxxxxxx
+Creature location: (1,1)
+xxxxxxxxxx
+x++xxx+++x
+x++x+++++x
+x++++++++x
+x++++++++x
+x++++++++x
+xxxxxxxxxx
+Creature end Location: (1,1)
+Path to exit: X
+
+Width: 10
+Height: 5
+RowExit: 0
+ColumnExit: 8
+xxxxxxxx x
+xx   xxx x
+x  x xx  x
+x xx     x
+xxxxxxxxxx
+Creature location: (3,1)
+xxxxxxxx*x
+xx***xxx*x
+x**x*xx *x
+x+xx*****x
+xxxxxxxxxx
+Creature end Location: (0,8)
+Path to exit: NENEESSEEEENNN
+
+=====================================================
+3. clang-tidy warnings are fixed
+=====================================================
+=====================================================
+4. No memory leaks using g++
+=====================================================
+=====================================================
+5. No memory leaks using valgrind, look for "definitely lost" 
+=====================================================
+==1283== Memcheck, a memory error detector
+==1283== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1283== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==1283== Command: ./a.out
+==1283== Parent PID: 1238
+==1283== 
+==1283== 
+==1283== HEAP SUMMARY:
+==1283==     in use at exit: 0 bytes in 0 blocks
+==1283==   total heap usage: 28 allocs, 28 frees, 112,070 bytes allocated
+==1283== 
+==1283== All heap blocks were freed -- no leaks are possible
+==1283== 
+==1283== For counts of detected and suppressed errors, rerun with: -v
+==1283== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+=====================================================
+6. Tests have full code coverage
+=====================================================
+File '/home/NETID/rchua1/342/assignment3/assignment3.cpp':
+Name                        Regions    Miss   Cover     Lines    Miss   Cover
+-----------------------------------------------------------------------------
+Test1()                           1       0 100.00%        21       0 100.00%
+Test2()                           1       0 100.00%        16       0 100.00%
+Test3()                           1       0 100.00%        16       0 100.00%
+Test4()                           1       0 100.00%        16       0 100.00%
+Test5()                           1       1   0.00%        16      16   0.00%
+TestAll()                         1       0 100.00%         7       0 100.00%
+main                              1       0 100.00%         4       0 100.00%
+-----------------------------------------------------------------------------
+TOTAL                             7       1  85.71%        96      16  83.33%
+
+File '/home/NETID/rchua1/342/assignment3/Creature.cpp':
+Name                                         Regions    Miss   Cover     Lines    Miss   Cover
+----------------------------------------------------------------------------------------------
+Creature::Creature(int, int)                       1       0 100.00%         5       0 100.00%
+Creature::NotValidStart(Maze&) const               9       0 100.00%         4       0 100.00%
+Creature::GoNorth(Maze&)                          35       7  80.00%        55       9  83.64%
+Creature::GoSouth(Maze&)                          35       6  82.86%        51       6  88.24%
+Creature::GoEast(Maze&)                           35       7  80.00%        51       9  82.35%
+Creature::GoWest(Maze&)                           35       9  74.29%        51      11  78.43%
+Creature::Solve[abi:cxx11](Maze&)                  5       0 100.00%         6       0 100.00%
+operator<<(std::ostream&, Creature const&)         1       0 100.00%         4       0 100.00%
+Creature::getRow() const                           1       1   0.00%         3       3   0.00%
+Creature::getColumn() const                        1       1   0.00%         3       3   0.00%
+----------------------------------------------------------------------------------------------
+TOTAL                                            158      31  80.38%       233      41  82.40%
+
+File '/home/NETID/rchua1/342/assignment3/Maze.cpp':
+Name                                                                                                 Regions    Miss   Cover     Lines    Miss   Cover
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Maze::Maze(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)                1       0 100.00%         7       0 100.00%
+Maze::readFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)           13       2  84.62%        30       4  86.67%
+Maze::FillIntData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)         5       0 100.00%        16       0 100.00%
+Maze::NotValidSizes() const                                                                               15       0 100.00%         4       0 100.00%
+Maze::IsClear(int, int) const                                                                              1       0 100.00%         3       0 100.00%
+Maze::IsWall(int, int) const                                                                               1       0 100.00%         3       0 100.00%
+Maze::IsPath(int, int) const                                                                               1       0 100.00%         3       0 100.00%
+Maze::IsVisited(int, int) const                                                                            1       0 100.00%         3       0 100.00%
+Maze::MarkAsPath(int, int)                                                                                 1       0 100.00%         3       0 100.00%
+Maze::MarkAsVisited(int, int)                                                                              1       0 100.00%         3       0 100.00%
+operator<<(std::ostream&, Maze const&)                                                                     7       0 100.00%         9       0 100.00%
+Maze::getWidth() const                                                                                     1       0 100.00%         3       0 100.00%
+Maze::getHeight() const                                                                                    1       0 100.00%         3       0 100.00%
+Maze::getRowExit() const                                                                                   1       0 100.00%         3       0 100.00%
+Maze::getColumnExit() const                                                                                1       0 100.00%         3       0 100.00%
+------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                     51       2  96.08%        96       4  95.83%
+=====================================================
+The lines below were never executed
+=====================================================
+   57|      0|        cout << "Creature is not at a valid starting point. Try new location." << endl;
+   58|      0|        success = false;
+   59|      0|    }
+   62|      0|        success = true;
+   63|      0|    }
+   98|      0|        else if(!(maze.IsWall(this->row, this->column-1)))
+   99|      0|            GoWest(maze);
+  100|      0|        else
+  101|      0|            success = false;
+  135|      0|            success = true;
+  136|      0|        }
+  159|      0|        else if(!(maze.IsWall(this->row, this->column-1)))
+  160|      0|            GoWest(maze);
+  161|      0|        else
+  162|      0|            success = false;
+  182|      0|        cout << "Creature is not at a valid starting point. Try new location." << endl;
+  183|      0|        success = false;
+  184|      0|    }
+  195|      0|            success = true;
+  196|      0|        }
+  219|      0|        else if(!(maze.IsWall(this->row + 1, this->column)))
+  220|      0|            GoSouth(maze);
+  221|      0|        else
+  222|      0|            success = false;
+  233|      0|        cout << "Creature is not at a valid starting point. Try new location." << endl;
+  234|      0|        success = false;
+  235|      0|    }
+  238|      0|        success = true;
+  239|      0|    }
+  246|      0|            success = true;
+  247|      0|        }
+  270|      0|        else if(!(maze.IsWall(this->row + 1, this->column)))
+  271|      0|            GoSouth(maze);
+  272|      0|        else
+  273|      0|            success = false;
+  310|      0|int Creature::getRow() const{
+  311|      0|    return row;
+  312|      0|}
+  314|      0|int Creature::getColumn() const{
+  315|      0|    return column;
+  316|      0|}
+   54|      0|            cout << "One or more maze parameters is either negative or greater than Max Size." << endl;
+   55|      0|        }
+   68|      0|    else
+   69|      0|        cout << "Unable to open file" <<endl;
+   86|      0|void Test5(){
+   87|      0|    Maze m("Prac.txt");
+   88|      0|    cout << "Width: " << m.getWidth() << endl;
+   89|      0|    cout << "Height: " << m.getHeight() << endl;
+   90|      0|    cout << "RowExit: " << m.getRowExit() << endl;
+   91|      0|    cout << "ColumnExit: " << m.getColumnExit() << endl;
+   92|      0|    cout << m;
+   93|      0|    
+   94|      0|    Creature c(2,1);
+   95|      0|    cout << "Creature location: " << c << endl;
+   96|      0|    c.GoSouth(m);
+   97|      0|    cout << m;
+   98|      0|    cout << "Creature end Location: " << c << endl;
+   99|      0|    cout << "Path to exit: " << c.Solve(m) << endl;
+  100|      0|    cout << endl;
+  101|      0|}
+Wed 04 May 2022 04:17:00 PM PDT
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================
